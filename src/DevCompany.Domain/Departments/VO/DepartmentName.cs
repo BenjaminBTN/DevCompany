@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,12 +8,12 @@ namespace DevCompany.Domain.Departments.VO;
 
 public record DepartmentName
 {
-    public string Value { get; }
-
     private DepartmentName(string value)
     {
         Value = value;
     }
+
+    public string Value { get; }
 
     public static Result<DepartmentName> Create(string value)
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using DevCompany.Domain.Departments.VO;
 
-namespace DevCompany.Domain.Departments.Entities;
+namespace DevCompany.Domain.Departments;
 
 public class Department
 {
@@ -60,8 +60,6 @@ public class Department
         DateTime createdAt = DateTime.Now;
         DateTime updatedAt = createdAt;
 
-        var department = new Department(id, name, identifier, parentId, path, depth, isActive, createdAt, updatedAt);
-
-        return Result.Success(department);
+        return new Department(id, name, identifier, parentId, path, depth, isActive, createdAt, updatedAt);
     }
 }

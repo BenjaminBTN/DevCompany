@@ -1,36 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using DevCompany.Domain.Departments.VO;
 
 namespace DevCompany.Domain.Departments;
 
 public class Department
 {
-    private Department(
-        Guid id,
-        DepartmentName name,
-        string identifier,
-        Guid? parentId,
-        DepartmentPath path,
-        short depth,
-        bool isActive,
-        DateTime createdAt,
-        DateTime updatedAt)
-    {
-        Id = id;
-        Name = name;
-        Identifier = identifier;
-        ParentId = parentId;
-        Path = path;
-        Depth = depth;
-        IsActive = isActive;
-        CreatedAt = createdAt;
-        UpdatedAt = updatedAt;
-    }
+    private List<DepartmentLocation> _departmentLocations = [];
+    private List<DepartmentPosition> _departmentPositions = [];
 
     public Guid Id { get; private set; }
     public DepartmentName Name { get; private set; }
@@ -41,6 +17,34 @@ public class Department
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
+    public IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
+    public IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
+
+    private Department(
+        Guid id,
+        DepartmentName name,
+        string identifier,
+        Guid? parentId,
+        DepartmentPath path,
+        short depth,
+        bool isActive,
+        DateTime createdAt,
+        DateTime updatedAt,
+        IEnumerable<Guid> locationIds,
+        IEnumerable<Guid> positionIds)
+    {
+        Id = id;
+        Name = name;
+        Identifier = identifier;
+        ParentId = parentId;
+        Path = path;
+        Depth = depth;
+        IsActive = isActive;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+        _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id, li).Value).ToList();
+        _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id, pi).Value).ToList();
+    }
 
     public static Result<Department> Create(
         DepartmentName name,
@@ -48,7 +52,9 @@ public class Department
         Guid? parentId,
         DepartmentPath path,
         short depth,
-        bool isActive)
+        bool isActive,
+        IEnumerable<Guid> locationIds,
+        IEnumerable<Guid> positionIds)
     {
         if (string.IsNullOrWhiteSpace(identifier))
             return Result.Failure<Department>("Identifier cannot be empty.");
@@ -60,6 +66,7 @@ public class Department
         DateTime createdAt = DateTime.Now;
         DateTime updatedAt = createdAt;
 
-        return new Department(id, name, identifier, parentId, path, depth, isActive, createdAt, updatedAt);
+        return new Department(
+            id, name, identifier, parentId, path, depth, isActive, createdAt, updatedAt, locationIds, positionIds);
     }
 }

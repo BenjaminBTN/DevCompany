@@ -15,9 +15,6 @@ public class DepartmentLocation
 
     public static Result<DepartmentLocation> Create(Guid departmentId, Guid locationId)
     {
-        if(departmentId == Guid.Empty)
-            return Result.Failure<DepartmentLocation>(nameof(DepartmentId) + " cannot be empty");
-
         if(locationId == Guid.Empty)
             return Result.Failure<DepartmentLocation>(nameof(LocationId) + " cannot be empty");
 

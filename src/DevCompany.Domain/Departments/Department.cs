@@ -8,11 +8,11 @@ public class Department
     private List<DepartmentLocation> _departmentLocations = [];
     private List<DepartmentPosition> _departmentPositions = [];
 
-    public Guid Id { get; private set; }
-    public DepartmentName Name { get; private set; }
+    public DepartmentId Id { get; private set; } = null!;
+    public DepartmentName Name { get; private set; } = null!;
     public string Identifier { get; private set; } = string.Empty;
     public Guid? ParentId { get; private set; }
-    public DepartmentPath Path { get; private set; }
+    public DepartmentPath Path { get; private set; } = null!;
     public short Depth { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
@@ -20,8 +20,13 @@ public class Department
     public IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
     public IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
 
+    // ef core
+    private Department()
+    {
+    }
+
     private Department(
-        Guid id,
+        DepartmentId id,
         DepartmentName name,
         string identifier,
         Guid? parentId,
@@ -42,8 +47,8 @@ public class Department
         IsActive = isActive;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
-        _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id, li).Value).ToList();
-        _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id, pi).Value).ToList();
+        _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id.Value, li).Value).ToList();
+        _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id.Value, pi).Value).ToList();
     }
 
     public static Result<Department> Create(
@@ -62,7 +67,7 @@ public class Department
         if (depth < 0)
             return Result.Failure<Department>("Depth cannot be less then zero.");
 
-        var id = Guid.NewGuid();
+        var id = DepartmentId.New();
         DateTime createdAt = DateTime.Now;
         DateTime updatedAt = createdAt;
 

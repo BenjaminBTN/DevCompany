@@ -6,7 +6,7 @@ namespace DevCompany.Domain.Positions;
 
 public class Position
 {
-    public Guid Id { get; private set; }
+    public PositionId Id { get; private set; } = null!;
     public PositionName Name { get; private set; } = null!;
     public string? Description { get; private set; }
     public bool IsActive { get; private set; }
@@ -14,7 +14,7 @@ public class Position
     public DateTime UpdatedAt { get; private set; }
 
     private Position(
-        Guid id,
+        PositionId id,
         PositionName name,
         string? description,
         bool isActive,
@@ -39,7 +39,7 @@ public class Position
         if (description?.Length > LengthConstants.LENGTH_1000)
             return Result.Failure<Position>("Description cannot be more than 1000");
 
-        var id = Guid.NewGuid();
+        var id = PositionId.New();
         DateTime createdAt = DateTime.UtcNow;
         DateTime updatedAt = createdAt;
 

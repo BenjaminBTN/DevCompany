@@ -12,7 +12,8 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
     {
         builder.ToTable("departments");
 
-        builder.HasKey(d => d.Id).HasName("pk_departments");
+        builder.HasKey(d => d.Id)
+            .HasName("pk_departments");
 
         builder.Property(d => d.Id)
             .HasConversion(

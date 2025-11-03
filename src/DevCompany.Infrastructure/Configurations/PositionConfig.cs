@@ -1,7 +1,6 @@
 ﻿using DevCompany.Domain.Constants;
 using DevCompany.Domain.Positions;
 using DevCompany.Domain.Positions.VO;
-using DevCompany.Domain.Shared.VO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,7 +12,8 @@ public class PositionConfig : IEntityTypeConfiguration<Position>
     {
         builder.ToTable("positions");
 
-        builder.HasKey(p => p.Id);
+        builder.HasKey(p => p.Id)
+            .HasName("pk_positions");
 
         builder.Property(p => p.Id)
             .HasConversion(

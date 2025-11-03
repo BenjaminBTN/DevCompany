@@ -13,7 +13,8 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
     {
         builder.ToTable("locations");
 
-        builder.HasKey(l => l.Id);
+        builder.HasKey(l => l.Id)
+            .HasName("pk_locations");
 
         builder.Property(l => l.Id)
             .HasConversion(

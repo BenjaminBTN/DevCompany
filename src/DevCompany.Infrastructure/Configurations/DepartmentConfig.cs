@@ -24,13 +24,11 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
         builder.ComplexProperty(d => d.Name, nb => 
         { 
             nb.Property(d => d.Value)
-            .IsRequired()
             .HasMaxLength(LengthConstants.LENGTH_150)
             .HasColumnName("name");
         });
 
         builder.Property(d => d.Identifier)
-            .IsRequired()
             .HasMaxLength(LengthConstants.LENGTH_150)
             .HasColumnName("identifier");
 
@@ -41,8 +39,8 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
             .IsRequired(false)
             .HasColumnName("parent_id");
 
-        builder.HasOne(d => d.Parent)
-            .WithMany(d => d.Childrens)
+        builder.HasOne<Department>()
+            .WithMany()
             .HasForeignKey(d => d.ParentId)
             .HasConstraintName("fk_departments_parent_id")
             .OnDelete(DeleteBehavior.Cascade);
@@ -50,26 +48,21 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
         builder.ComplexProperty(d => d.Path, nb =>
         {
             nb.Property(d => d.Value)
-            .IsRequired()
             .HasMaxLength(LengthConstants.LENGTH_150)
             .HasColumnName("path");
         });
 
         builder.Property(d => d.Depth)
-            .IsRequired()
             .HasMaxLength(LengthConstants.LENGTH_100)
             .HasColumnName("depth");
 
         builder.Property(d => d.IsActive)
-            .IsRequired()
             .HasColumnName("is_active");
 
         builder.Property(d => d.CreatedAt)
-            .IsRequired()
             .HasColumnName("created_at");
 
         builder.Property(d => d.UpdatedAt)
-            .IsRequired()
             .HasColumnName("updated_at");
     }
 }

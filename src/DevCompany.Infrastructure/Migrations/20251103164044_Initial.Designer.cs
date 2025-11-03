@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DevCompany.Infrastructure.Migrations
 {
     [DbContext(typeof(DirectoryServiceDbContext))]
-    [Migration("20251103162211_Initial")]
+    [Migration("20251103164044_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -194,7 +194,6 @@ namespace DevCompany.Infrastructure.Migrations
                         .HasColumnName("crated_at");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)")
                         .HasColumnName("description");
@@ -226,13 +225,11 @@ namespace DevCompany.Infrastructure.Migrations
 
             modelBuilder.Entity("DevCompany.Domain.Departments.Department", b =>
                 {
-                    b.HasOne("DevCompany.Domain.Departments.Department", "Parent")
-                        .WithMany("Childrens")
+                    b.HasOne("DevCompany.Domain.Departments.Department", null)
+                        .WithMany()
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("fk_departments_parent_id");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("DevCompany.Domain.Departments.DepartmentLocation", b =>
@@ -321,8 +318,6 @@ namespace DevCompany.Infrastructure.Migrations
 
             modelBuilder.Entity("DevCompany.Domain.Departments.Department", b =>
                 {
-                    b.Navigation("Childrens");
-
                     b.Navigation("Locations");
 
                     b.Navigation("Positions");

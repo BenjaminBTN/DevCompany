@@ -25,7 +25,6 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
         builder.ComplexProperty(l => l.Name, nb =>
         {
             nb.Property(l => l.Value)
-                .IsRequired()
                 .HasMaxLength(LengthConstants.LENGTH_120)
                 .HasColumnName("name");
         });
@@ -35,19 +34,15 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
             ab.ToJson("address");
 
             ab.Property(a => a.Country)
-                .IsRequired()
                 .HasMaxLength(LengthConstants.LENGTH_100);
 
             ab.Property(a => a.Region)
-                .IsRequired()
                 .HasMaxLength(LengthConstants.LENGTH_100);
 
             ab.Property(a => a.City)
-                .IsRequired()
                 .HasMaxLength(LengthConstants.LENGTH_100);
 
             ab.Property(a => a.Street)
-                .IsRequired()
                 .HasMaxLength(LengthConstants.LENGTH_100);
 
             ab.Property(a => a.HouseNumber)
@@ -55,28 +50,23 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
                 .HasMaxLength(LengthConstants.LENGTH_100);
 
             ab.Property(a => a.PostalCode)
-                .IsRequired()
                 .HasMaxLength(Address.POSTAL_CODE_LENGTH);
         });
 
         builder.ComplexProperty(l => l.TimeZone, nb =>
         {
             nb.Property(l => l.Value)
-                .IsRequired()
                 .HasMaxLength(LengthConstants.LENGTH_100)
                 .HasColumnName("time_zone");
         });
 
         builder.Property(l => l.IsActive)
-            .IsRequired()
             .HasColumnName("is_active");
 
         builder.Property(l => l.CreatedAt)
-            .IsRequired()
             .HasColumnName("crated_at");
 
         builder.Property(l => l.UpdatedAt)
-            .IsRequired()
             .HasColumnName("updated_at");
     }
 }

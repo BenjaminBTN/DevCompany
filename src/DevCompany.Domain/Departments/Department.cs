@@ -7,13 +7,11 @@ public class Department
 {
     private List<DepartmentLocation> _locations = [];
     private List<DepartmentPosition> _positions = [];
-    private List<Department> _childrens = [];
 
     public DepartmentId Id { get; private set; } = null!;
     public DepartmentName Name { get; private set; } = null!;
     public string Identifier { get; private set; } = string.Empty;
     public DepartmentId? ParentId { get; private set; }
-    public Department Parent { get; private set; } = null!;
     public DepartmentPath Path { get; private set; } = null!;
     public short Depth { get; private set; }
     public bool IsActive { get; private set; }
@@ -21,7 +19,6 @@ public class Department
     public DateTime UpdatedAt { get; private set; }
     public IReadOnlyList<DepartmentLocation> Locations => _locations;
     public IReadOnlyList<DepartmentPosition> Positions => _positions;
-    public IReadOnlyList<Department> Childrens => _childrens;
 
     private Department(
         DepartmentId id,

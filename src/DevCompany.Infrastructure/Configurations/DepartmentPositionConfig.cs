@@ -28,7 +28,6 @@ public class DepartmentPositionConfig : IEntityTypeConfiguration<DepartmentPosit
             .WithMany(d => d.Positions) // без заполнения параметров создает две одинаковых колонки
             .HasForeignKey(dp => dp.DepartmentId)
             .HasConstraintName("fk_department_positions_department_id")
-            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(dp => dp.PositionId)
@@ -38,7 +37,6 @@ public class DepartmentPositionConfig : IEntityTypeConfiguration<DepartmentPosit
             .WithMany()
             .HasForeignKey(dp => dp.PositionId)
             .HasConstraintName("fk_department_positions_position_id")
-            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

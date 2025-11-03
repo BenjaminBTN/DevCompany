@@ -24,26 +24,22 @@ public class PositionConfig : IEntityTypeConfiguration<Position>
         builder.ComplexProperty(p => p.Name, nb =>
         {
             nb.Property(p => p.Value)
-                .IsRequired()
                 .HasMaxLength(LengthConstants.LENGTH_100)
                 .HasColumnName("name");
         });
 
         builder.Property(p => p.Description)
-            .IsRequired()
+            .IsRequired(false)
             .HasMaxLength(LengthConstants.LENGTH_1000)
             .HasColumnName("description");
 
         builder.Property(p => p.IsActive)
-            .IsRequired()
             .HasColumnName("is_active");
 
         builder.Property(p => p.CreatedAt)
-            .IsRequired()
             .HasColumnName("crated_at");
 
         builder.Property(p => p.UpdatedAt)
-            .IsRequired()
             .HasColumnName("updated_at");
     }
 }

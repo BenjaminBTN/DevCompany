@@ -1,9 +1,14 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿using DevCompany.Infrastructure;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-var app = builder.Build();
+builder.Services.AddScoped<DirectoryServiceDbContext>(_
+    => new (builder.Configuration.GetConnectionString("DirectoryServiceDb")!));
+
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {

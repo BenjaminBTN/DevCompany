@@ -68,7 +68,7 @@ public class Department
             return Result.Failure<Department>("Depth cannot be less then zero.");
 
         var id = DepartmentId.New();
-        DateTime createdAt = DateTime.Now;
+        DateTime createdAt = DateTime.UtcNow;
         DateTime updatedAt = createdAt;
 
         return new Department(

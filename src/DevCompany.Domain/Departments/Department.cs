@@ -20,11 +20,6 @@ public class Department
     public IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
     public IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
 
-    // ef core
-    private Department()
-    {
-    }
-
     private Department(
         DepartmentId id,
         DepartmentName name,
@@ -49,6 +44,11 @@ public class Department
         UpdatedAt = updatedAt;
         _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id.Value, li).Value).ToList();
         _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id.Value, pi).Value).ToList();
+    }
+
+    // ef core
+    private Department()
+    {
     }
 
     public static Result<Department> Create(

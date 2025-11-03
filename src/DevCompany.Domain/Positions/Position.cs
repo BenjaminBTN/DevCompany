@@ -6,6 +6,13 @@ namespace DevCompany.Domain.Positions;
 
 public class Position
 {
+    public Guid Id { get; private set; }
+    public PositionName Name { get; private set; } = null!;
+    public string? Description { get; private set; }
+    public bool IsActive { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
+
     private Position(
         Guid id,
         PositionName name,
@@ -22,12 +29,10 @@ public class Position
         UpdatedAt = updatedAt;
     }
 
-    public Guid Id { get; private set; }
-    public PositionName Name { get; private set; }
-    public string? Description { get; private set; }
-    public bool IsActive { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime UpdatedAt { get; private set; }
+    // ef core
+    private Position()
+    {
+    }
 
     public static Result<Position> Create(PositionName name, string? description, bool isActive)
     {

@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using DevCompany.Domain.Constants;
 
 namespace DevCompany.Domain.Positions.VO;
 
@@ -16,7 +17,7 @@ public record PositionName
         if (string.IsNullOrWhiteSpace(value))
             return Result.Failure<PositionName>(nameof(PositionName) + " cannot be empty.");
 
-        if (value.Length < 3 || value.Length > 100)
+        if (value.Length < LengthConstants.LENGTH_3 || value.Length > LengthConstants.LENGTH_100)
             return Result.Failure<PositionName>("Invalid " + nameof(PositionName) + " length.");
 
         return new PositionName(value);

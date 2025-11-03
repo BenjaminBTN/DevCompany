@@ -11,6 +11,7 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
     public void Configure(EntityTypeBuilder<Department> builder)
     {
         builder.ToTable("departments");
+
         builder.HasKey(d => d.Id).HasName("pk_departments");
 
         builder.Property(d => d.Id)
@@ -23,13 +24,13 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
         { 
             nb.Property(d => d.Value)
             .IsRequired()
-            .HasMaxLength(LengthConstants.LENGTH_500)
+            .HasMaxLength(LengthConstants.LENGTH_150)
             .HasColumnName("name");
         });
 
         builder.Property(d => d.Identifier)
             .IsRequired()
-            .HasMaxLength(LengthConstants.LENGTH_500)
+            .HasMaxLength(LengthConstants.LENGTH_150)
             .HasColumnName("identifier");
 
         builder.HasOne<Department>()
@@ -41,18 +42,17 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
         {
             nb.Property(d => d.Value)
             .IsRequired()
-            .HasMaxLength(LengthConstants.LENGTH_500)
+            .HasMaxLength(LengthConstants.LENGTH_150)
             .HasColumnName("path");
         });
 
         builder.Property(d => d.Depth)
             .IsRequired()
-            .HasMaxLength(LengthConstants.LENGTH_500)
+            .HasMaxLength(LengthConstants.LENGTH_100)
             .HasColumnName("depth");
 
         builder.Property(d => d.IsActive)
             .IsRequired()
-            .HasMaxLength(LengthConstants.LENGTH_500)
             .HasColumnName("is_active");
 
         builder.Property(d => d.CreatedAt)

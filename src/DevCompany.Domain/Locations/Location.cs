@@ -6,8 +6,16 @@ namespace DevCompany.Domain.Locations;
 
 public class Location
 {
+    public LocationId Id { get; private set; } = null!;
+    public LocationName Name { get; private set; } = null!;
+    public Address Address { get; private set; } = null!;
+    public Timezone TimeZone { get; private set; } = null!;
+    public bool IsActive { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
+
     private Location(
-        Guid id, 
+        LocationId id, 
         LocationName name, 
         Address address, 
         Timezone timeZone, 
@@ -24,17 +32,14 @@ public class Location
         UpdatedAt = updatedAt;
     }
 
-    public Guid Id { get; private set; }
-    public LocationName Name { get; private set; }
-    public Address Address { get; private set; }
-    public Timezone TimeZone { get; private set; }
-    public bool IsActive { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime UpdatedAt { get; private set; }
+    // ef core
+    private Location()
+    {
+    }
 
     public static Result<Location> Create(LocationName name, Address address, Timezone timezone, bool isActive)
     {
-        var id = Guid.NewGuid();
+        var id = LocationId.New();
         DateTime createdAt = DateTime.UtcNow;
         DateTime updatedAt = createdAt;
 

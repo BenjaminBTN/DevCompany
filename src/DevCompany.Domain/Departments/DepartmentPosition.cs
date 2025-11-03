@@ -1,27 +1,30 @@
 ﻿using CSharpFunctionalExtensions;
 using DevCompany.Domain.Departments.VO;
+using DevCompany.Domain.Positions.VO;
 
 namespace DevCompany.Domain.Departments;
 
 public class DepartmentPosition
 {
-    public DepartmentPositionId Id { get; private set; }
-    public Guid DepartmentId { get; private set; }
-    public Guid PositionId { get; private set; }
+    public DepartmentPositionId Id { get; private set; } = null!;
+    public DepartmentId DepartmentId { get; private set; } = null!;
+    public PositionId PositionId { get; private set; } = null!;
 
-    private DepartmentPosition(DepartmentPositionId id, Guid departmentId, Guid positionId)
+    private DepartmentPosition(DepartmentPositionId id, DepartmentId departmentId, Guid positionId)
     {
         Id = id;
         DepartmentId = departmentId;
-        PositionId = positionId;
+        PositionId = PositionId.Create(positionId);
     }
 
-    public static Result<DepartmentPosition> Create(Guid departmentId, Guid positionId)
+    // ef core
+    private DepartmentPosition()
     {
-        if(departmentId == Guid.Empty)
-            return Result.Failure<DepartmentPosition>(nameof(DepartmentId) + " cannot be empty");
+    }
 
-        if(positionId == Guid.Empty)
+    public static Result<DepartmentPosition> Create(DepartmentId departmentId, Guid positionId)
+    {
+        if (positionId == Guid.Empty)
             return Result.Failure<DepartmentPosition>(nameof(PositionId) + " cannot be empty");
 
         var id = DepartmentPositionId.New();

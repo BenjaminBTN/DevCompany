@@ -1,4 +1,5 @@
 ﻿using DevCompany.Domain.Departments;
+using DevCompany.Domain.Departments.VO;
 using DevCompany.Domain.Locations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -13,6 +14,12 @@ public class DepartmentLocationConfig : IEntityTypeConfiguration<DepartmentLocat
 
         builder.HasKey(dl => dl.Id)
             .HasName("pk_department_locations");
+
+        builder.Property(dl => dl.Id)
+            .HasConversion(
+                id => id.Value,
+                value => DepartmentLocationId.Create(value))
+            .HasColumnName("id");
 
         builder.HasOne<Department>()
             .WithMany()

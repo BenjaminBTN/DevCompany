@@ -34,10 +34,17 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
             .HasMaxLength(LengthConstants.LENGTH_150)
             .HasColumnName("identifier");
 
-        builder.HasOne<Department>()
-            .WithMany()
+        builder.Property(d => d.ParentId)
+            .HasConversion(
+                id => id!.Value,
+                value => DepartmentId.Create(value))
+            .IsRequired(false)
+            .HasColumnName("parent_id");
+
+        builder.HasOne(d => d.Parent)
+            .WithMany(d => d.Childrens)
             .HasForeignKey(d => d.ParentId)
-            .IsRequired(false);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.ComplexProperty(d => d.Path, nb =>
         {

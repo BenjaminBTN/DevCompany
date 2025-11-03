@@ -39,9 +39,11 @@ public class PositionConfig : IEntityTypeConfiguration<Position>
             .HasColumnName("is_active");
 
         builder.Property(p => p.CreatedAt)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnName("crated_at");
 
         builder.Property(p => p.UpdatedAt)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnName("updated_at");
     }
 }

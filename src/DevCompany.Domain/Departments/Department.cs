@@ -7,11 +7,13 @@ public class Department
 {
     private List<DepartmentLocation> _departmentLocations = [];
     private List<DepartmentPosition> _departmentPositions = [];
+    private List<Department> _childrens = [];
 
     public DepartmentId Id { get; private set; } = null!;
     public DepartmentName Name { get; private set; } = null!;
     public string Identifier { get; private set; } = string.Empty;
-    public Guid? ParentId { get; private set; }
+    public DepartmentId? ParentId { get; private set; }
+    public Department Parent { get; private set; } = null!;
     public DepartmentPath Path { get; private set; } = null!;
     public short Depth { get; private set; }
     public bool IsActive { get; private set; }
@@ -19,12 +21,13 @@ public class Department
     public DateTime UpdatedAt { get; private set; }
     public IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
     public IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
+    public IReadOnlyList<Department> Childrens => _childrens;
 
     private Department(
         DepartmentId id,
         DepartmentName name,
         string identifier,
-        Guid? parentId,
+        DepartmentId? parentId,
         DepartmentPath path,
         short depth,
         bool isActive,
@@ -42,8 +45,8 @@ public class Department
         IsActive = isActive;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
-        _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id.Value, li).Value).ToList();
-        _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id.Value, pi).Value).ToList();
+        _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id, li).Value).ToList();
+        _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id, pi).Value).ToList();
     }
 
     // ef core
@@ -54,7 +57,7 @@ public class Department
     public static Result<Department> Create(
         DepartmentName name,
         string identifier,
-        Guid? parentId,
+        DepartmentId? parentId,
         DepartmentPath path,
         short depth,
         bool isActive,

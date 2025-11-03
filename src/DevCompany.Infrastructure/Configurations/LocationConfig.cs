@@ -72,9 +72,11 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
             .HasColumnName("is_active");
 
         builder.Property(l => l.CreatedAt)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnName("crated_at");
 
         builder.Property(l => l.UpdatedAt)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnName("updated_at");
     }
 }

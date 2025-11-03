@@ -44,6 +44,7 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
         builder.HasOne(d => d.Parent)
             .WithMany(d => d.Childrens)
             .HasForeignKey(d => d.ParentId)
+            .HasConstraintName("fk_departments_parent_id")
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.ComplexProperty(d => d.Path, nb =>
@@ -64,19 +65,11 @@ public class DepartmentConfig : IEntityTypeConfiguration<Department>
             .HasColumnName("is_active");
 
         builder.Property(d => d.CreatedAt)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnName("created_at");
 
         builder.Property(d => d.UpdatedAt)
-            .IsRequired();
-
-        builder.HasMany(d => d.DepartmentLocations)
-            .WithOne()
             .IsRequired()
-            .HasForeignKey(dl => dl.DepartmentId);
-
-        builder.HasMany(d => d.DepartmentPositions)
-            .WithOne()
-            .IsRequired()
-            .HasForeignKey(dp => dp.DepartmentId);
+            .HasColumnName("updated_at");
     }
 }

@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DevCompany.Infrastructure.Migrations
 {
     [DbContext(typeof(DirectoryServiceDbContext))]
-    [Migration("20251103154433_Initial")]
+    [Migration("20251103162211_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,7 +33,8 @@ namespace DevCompany.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<short>("Depth")
                         .HasMaxLength(100)
@@ -55,7 +56,8 @@ namespace DevCompany.Infrastructure.Migrations
                         .HasColumnName("parent_id");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.ComplexProperty<Dictionary<string, object>>("Name", "DevCompany.Domain.Departments.Department.Name#DepartmentName", b1 =>
                         {
@@ -94,20 +96,17 @@ namespace DevCompany.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("DepartmentId1")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("department_id");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("location_id");
 
                     b.HasKey("Id")
                         .HasName("pk_department_locations");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("DepartmentId1");
 
                     b.HasIndex("LocationId");
 
@@ -121,20 +120,17 @@ namespace DevCompany.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("DepartmentId1")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("department_id");
 
                     b.Property<Guid>("PositionId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("position_id");
 
                     b.HasKey("Id")
                         .HasName("pk_department_positions");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("DepartmentId1");
 
                     b.HasIndex("PositionId");
 
@@ -233,7 +229,8 @@ namespace DevCompany.Infrastructure.Migrations
                     b.HasOne("DevCompany.Domain.Departments.Department", "Parent")
                         .WithMany("Childrens")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("fk_departments_parent_id");
 
                     b.Navigation("Parent");
                 });
@@ -241,39 +238,35 @@ namespace DevCompany.Infrastructure.Migrations
             modelBuilder.Entity("DevCompany.Domain.Departments.DepartmentLocation", b =>
                 {
                     b.HasOne("DevCompany.Domain.Departments.Department", null)
-                        .WithMany()
+                        .WithMany("Locations")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DevCompany.Domain.Departments.Department", null)
-                        .WithMany("DepartmentLocations")
-                        .HasForeignKey("DepartmentId1");
+                        .IsRequired()
+                        .HasConstraintName("fk_department_locations_department_id");
 
                     b.HasOne("DevCompany.Domain.Locations.Location", null)
                         .WithMany()
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_department_locations_location_id");
                 });
 
             modelBuilder.Entity("DevCompany.Domain.Departments.DepartmentPosition", b =>
                 {
                     b.HasOne("DevCompany.Domain.Departments.Department", null)
-                        .WithMany()
+                        .WithMany("Positions")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DevCompany.Domain.Departments.Department", null)
-                        .WithMany("DepartmentPositions")
-                        .HasForeignKey("DepartmentId1");
+                        .IsRequired()
+                        .HasConstraintName("fk_department_positions_department_id");
 
                     b.HasOne("DevCompany.Domain.Positions.Position", null)
                         .WithMany()
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_department_positions_position_id");
                 });
 
             modelBuilder.Entity("DevCompany.Domain.Locations.Location", b =>
@@ -330,9 +323,9 @@ namespace DevCompany.Infrastructure.Migrations
                 {
                     b.Navigation("Childrens");
 
-                    b.Navigation("DepartmentLocations");
+                    b.Navigation("Locations");
 
-                    b.Navigation("DepartmentPositions");
+                    b.Navigation("Positions");
                 });
 #pragma warning restore 612, 618
         }

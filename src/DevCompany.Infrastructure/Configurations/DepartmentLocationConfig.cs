@@ -21,15 +21,23 @@ public class DepartmentLocationConfig : IEntityTypeConfiguration<DepartmentLocat
                 value => DepartmentLocationId.Create(value))
             .HasColumnName("id");
 
+        builder.Property(dp => dp.DepartmentId)
+            .HasColumnName("department_id");
+
         builder.HasOne<Department>()
-            .WithMany()
+            .WithMany(d => d.Locations) // без заполнения параметров создает две одинаковых колонки
             .HasForeignKey(dl => dl.DepartmentId)
+            .HasConstraintName("fk_department_locations_department_id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Property(dp => dp.LocationId)
+            .HasColumnName("location_id");
 
         builder.HasOne<Location>()
             .WithMany()
             .HasForeignKey(dl => dl.LocationId)
+            .HasConstraintName("fk_department_locations_location_id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

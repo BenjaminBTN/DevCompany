@@ -5,8 +5,8 @@ namespace DevCompany.Domain.Departments;
 
 public class Department
 {
-    private List<DepartmentLocation> _departmentLocations = [];
-    private List<DepartmentPosition> _departmentPositions = [];
+    private List<DepartmentLocation> _locations = [];
+    private List<DepartmentPosition> _positions = [];
     private List<Department> _childrens = [];
 
     public DepartmentId Id { get; private set; } = null!;
@@ -19,8 +19,8 @@ public class Department
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-    public IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
-    public IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
+    public IReadOnlyList<DepartmentLocation> Locations => _locations;
+    public IReadOnlyList<DepartmentPosition> Positions => _positions;
     public IReadOnlyList<Department> Childrens => _childrens;
 
     private Department(
@@ -45,8 +45,8 @@ public class Department
         IsActive = isActive;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
-        _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id, li).Value).ToList();
-        _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id, pi).Value).ToList();
+        _locations = locationIds.Select(li => DepartmentLocation.Create(Id, li).Value).ToList();
+        _positions = positionIds.Select(pi => DepartmentPosition.Create(Id, pi).Value).ToList();
     }
 
     // ef core

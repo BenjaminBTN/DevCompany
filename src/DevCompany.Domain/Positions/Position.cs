@@ -1,40 +1,46 @@
 ﻿using CSharpFunctionalExtensions;
+using DevCompany.Domain.Constants;
 using DevCompany.Domain.Positions.VO;
 
 namespace DevCompany.Domain.Positions;
 
 public class Position
 {
+    public PositionId Id { get; private set; } = null!;
+    public PositionName Name { get; private set; } = null!;
+    public string? Description { get; private set; }
+    public bool IsActive { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
+
     private Position(
-        Guid id,
+        PositionId id,
         PositionName name,
-        string? descripton,
+        string? description,
         bool isActive,
         DateTime createdAt,
         DateTime updatedAt)
     {
         Id = id;
         Name = name;
-        Descripton = descripton;
+        Description = description;
         IsActive = isActive;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
     }
 
-    public Guid Id { get; private set; }
-    public PositionName Name { get; private set; }
-    public string? Descripton { get; private set; }
-    public bool IsActive { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime UpdatedAt { get; private set; }
+    // ef core
+    private Position()
+    {
+    }
 
     public static Result<Position> Create(PositionName name, string? description, bool isActive)
     {
-        if (description?.Length > 1000)
+        if (description?.Length > LengthConstants.LENGTH_1000)
             return Result.Failure<Position>("Description cannot be more than 1000");
 
-        var id = Guid.NewGuid();
-        DateTime createdAt = DateTime.Now;
+        var id = PositionId.New();
+        DateTime createdAt = DateTime.UtcNow;
         DateTime updatedAt = createdAt;
 
         return new Position(id, name, description, isActive, createdAt, updatedAt);

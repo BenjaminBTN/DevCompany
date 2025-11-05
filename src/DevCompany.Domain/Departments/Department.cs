@@ -5,26 +5,26 @@ namespace DevCompany.Domain.Departments;
 
 public class Department
 {
-    private List<DepartmentLocation> _departmentLocations = [];
-    private List<DepartmentPosition> _departmentPositions = [];
+    private List<DepartmentLocation> _locations = [];
+    private List<DepartmentPosition> _positions = [];
 
-    public Guid Id { get; private set; }
-    public DepartmentName Name { get; private set; }
+    public DepartmentId Id { get; private set; } = null!;
+    public DepartmentName Name { get; private set; } = null!;
     public string Identifier { get; private set; } = string.Empty;
-    public Guid? ParentId { get; private set; }
-    public DepartmentPath Path { get; private set; }
+    public DepartmentId? ParentId { get; private set; }
+    public DepartmentPath Path { get; private set; } = null!;
     public short Depth { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-    public IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
-    public IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
+    public IReadOnlyList<DepartmentLocation> Locations => _locations;
+    public IReadOnlyList<DepartmentPosition> Positions => _positions;
 
     private Department(
-        Guid id,
+        DepartmentId id,
         DepartmentName name,
         string identifier,
-        Guid? parentId,
+        DepartmentId? parentId,
         DepartmentPath path,
         short depth,
         bool isActive,
@@ -42,14 +42,19 @@ public class Department
         IsActive = isActive;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
-        _departmentLocations = locationIds.Select(li => DepartmentLocation.Create(Id, li).Value).ToList();
-        _departmentPositions = positionIds.Select(pi => DepartmentPosition.Create(Id, pi).Value).ToList();
+        _locations = locationIds.Select(li => DepartmentLocation.Create(Id, li).Value).ToList();
+        _positions = positionIds.Select(pi => DepartmentPosition.Create(Id, pi).Value).ToList();
+    }
+
+    // ef core
+    private Department()
+    {
     }
 
     public static Result<Department> Create(
         DepartmentName name,
         string identifier,
-        Guid? parentId,
+        DepartmentId? parentId,
         DepartmentPath path,
         short depth,
         bool isActive,
@@ -62,8 +67,8 @@ public class Department
         if (depth < 0)
             return Result.Failure<Department>("Depth cannot be less then zero.");
 
-        var id = Guid.NewGuid();
-        DateTime createdAt = DateTime.Now;
+        var id = DepartmentId.New();
+        DateTime createdAt = DateTime.UtcNow;
         DateTime updatedAt = createdAt;
 
         return new Department(

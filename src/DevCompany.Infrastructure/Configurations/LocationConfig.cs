@@ -1,6 +1,6 @@
-﻿using DevCompany.Domain.Constants;
-using DevCompany.Domain.Locations;
+﻿using DevCompany.Domain.Locations;
 using DevCompany.Domain.Locations.VO;
+using DevCompany.Domain.Shared.Constants;
 using DevCompany.Domain.Shared.VO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

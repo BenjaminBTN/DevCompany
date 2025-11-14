@@ -1,4 +1,4 @@
-﻿namespace DevCompany.Domain.Constants;
+﻿namespace DevCompany.Domain.Shared.Constants;
 
 public readonly struct LengthConstants
 {

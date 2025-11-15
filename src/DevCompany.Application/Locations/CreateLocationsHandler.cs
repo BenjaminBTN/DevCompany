@@ -25,8 +25,8 @@ public class CreateLocationsHandler
 
         var timeZone = Timezone.Create(request.Timezone).Value;
 
-        var location = Location.Create(name, address, timeZone);
+        var location = Location.Create(name, address, timeZone).Value;
 
-        return await _repository.Add(location.Value, cancellationToken);
+        return await _repository.Add(location, cancellationToken);
     }
 }

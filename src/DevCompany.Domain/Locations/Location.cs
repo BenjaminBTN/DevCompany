@@ -37,7 +37,7 @@ public class Location
     {
     }
 
-    public static Result<Location> Create(LocationName name, Address address, Timezone timezone, bool isActive)
+    public static Result<Location> Create(LocationName name, Address address, Timezone timezone, bool isActive = true)
     {
         var id = LocationId.New();
         DateTime createdAt = DateTime.UtcNow;

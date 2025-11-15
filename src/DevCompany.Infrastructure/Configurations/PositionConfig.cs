@@ -1,6 +1,6 @@
-﻿using DevCompany.Domain.Constants;
-using DevCompany.Domain.Positions;
+﻿using DevCompany.Domain.Positions;
 using DevCompany.Domain.Positions.VO;
+using DevCompany.Domain.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,4 +1,6 @@
-﻿using DevCompany.Infrastructure;
+﻿using DevCompany.Application.Locations;
+using DevCompany.Infrastructure;
+using DevCompany.Infrastructure.Repositories;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,8 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<DirectoryServiceDbContext>(
     _ => new (builder.Configuration.GetConnectionString("DirectoryServiceDb")!));
+builder.Services.AddScoped<ILocationsRepository, LocationsRepository>();
+builder.Services.AddScoped<CreateLocationsHandler>();
 
 WebApplication app = builder.Build();
 

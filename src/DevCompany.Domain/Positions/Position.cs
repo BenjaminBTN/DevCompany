@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
-using DevCompany.Domain.Constants;
 using DevCompany.Domain.Positions.VO;
+using DevCompany.Domain.Shared.Constants;
 
 namespace DevCompany.Domain.Positions;
 

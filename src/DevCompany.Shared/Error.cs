@@ -26,6 +26,9 @@ public class Error
 
     public static Error Failure(string code, string message)
         => new(ErrorType.FAILURE, code, message);
+
+    public Errors ToErrors()
+        => new([this]);
 }
 
 public enum ErrorType

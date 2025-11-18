@@ -1,15 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36705.20 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevCompany.Domain", "src\DevCompany.Domain\DevCompany.Domain.csproj", "{4690939F-2EC2-4EB6-B5D0-181CBD063EE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevCompany.Application", "src\DevCompany.Application\DevCompany.Application.csproj", "{66791481-ACD6-44F3-A8BA-1F6DEEB79235}"
+	ProjectSection(ProjectDependencies) = postProject
+		{55DC7BD8-18CF-458B-92E9-64C6A57CC5B2} = {55DC7BD8-18CF-458B-92E9-64C6A57CC5B2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevCompany.Infrastructure", "src\DevCompany.Infrastructure\DevCompany.Infrastructure.csproj", "{E3E354F4-E42D-4981-93B8-093ACB658BFA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{55DC7BD8-18CF-458B-92E9-64C6A57CC5B2} = {55DC7BD8-18CF-458B-92E9-64C6A57CC5B2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevCompany.Presentation", "src\DevCompany.Presentation\DevCompany.Presentation.csproj", "{802DC355-2EE9-4567-821D-8499E0F1ADD0}"
 EndProject
@@ -18,6 +24,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{754FC069-D67B-A9D7-50A1-8D1CA196D8F1}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevCompany.Shared", "src\DevCompany.Shared\DevCompany.Shared.csproj", "{55DC7BD8-18CF-458B-92E9-64C6A57CC5B2}"

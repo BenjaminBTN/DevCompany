@@ -1,4 +1,4 @@
-﻿namespace DevCompany.Shared.Errors;
+﻿namespace DevCompany.Shared;
 
 public class Error
 {

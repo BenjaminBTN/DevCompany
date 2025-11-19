@@ -1,5 +1,4 @@
 ﻿using DevCompany.Shared;
-using Microsoft.AspNetCore.Http;
 
 namespace DevCompany.Presentation.EndpointResults;
 

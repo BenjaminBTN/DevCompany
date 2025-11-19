@@ -26,7 +26,7 @@ public class ErrorResult : IResult
             .Distinct()
             .ToList();
 
-        if (errorType.Count > 1)
+        if (errorType.Count > 1 || errorType.Count < 1)
             return code;
 
         code = errorType.First() switch

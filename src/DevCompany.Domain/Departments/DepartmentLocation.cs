@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using DevCompany.Domain.Departments.VO;
 using DevCompany.Domain.Locations.VO;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Departments;
 
@@ -22,10 +23,10 @@ public class DepartmentLocation
     {
     }
 
-    public static Result<DepartmentLocation> Create(DepartmentId departmentId, Guid locationId)
+    public static Result<DepartmentLocation, Error> Create(DepartmentId departmentId, Guid locationId)
     {
         if (locationId == Guid.Empty)
-            return Result.Failure<DepartmentLocation>(nameof(LocationId) + " cannot be empty");
+           return GeneralErrors.CannotBeEmpty(nameof(LocationId));
 
         var id = DepartmentLocationId.New();
 

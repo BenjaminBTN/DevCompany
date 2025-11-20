@@ -1,5 +1,4 @@
-﻿using CSharpFunctionalExtensions;
-using DevCompany.Domain.Locations.VO;
+﻿using DevCompany.Domain.Locations.VO;
 using DevCompany.Domain.Shared.VO;
 
 namespace DevCompany.Domain.Locations;
@@ -14,7 +13,7 @@ public class Location
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
-    private Location(
+    public Location(
         LocationId id, 
         LocationName name, 
         Address address, 
@@ -35,14 +34,5 @@ public class Location
     // ef core
     private Location()
     {
-    }
-
-    public static Result<Location> Create(LocationName name, Address address, Timezone timezone, bool isActive = true)
-    {
-        var id = LocationId.New();
-        DateTime createdAt = DateTime.UtcNow;
-        DateTime updatedAt = createdAt;
-
-        return new Location(id, name, address, timezone, isActive, createdAt, updatedAt);
     }
 }

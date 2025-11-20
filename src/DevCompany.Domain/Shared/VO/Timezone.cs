@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using CSharpFunctionalExtensions;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Shared.VO;
 
@@ -14,10 +15,10 @@ public record Timezone
         Value = value;
     }
 
-    public static Result<Timezone> Create(string value)
+    public static Result<Timezone, Error> Create(string value)
     {
         if (Regex.Match(value, IANA_PATTERN).Success == false)
-            return Result.Failure<Timezone>("Invalid " + nameof(Timezone) + ".");
+            return GeneralErrors.InvalidField("Timezone");
 
         return new Timezone(value);
     }

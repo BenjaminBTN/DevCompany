@@ -2,10 +2,18 @@
 
 public class GeneralErrors
 {
-    public static Error Validation(string? invalidField = null)
+    public static Error InvalidField(string? invalidField = null)
     {
         string insert = invalidField == null ? string.Empty : ": " + invalidField;
-        string message = $"Validation error. The field is invalid{insert}.";
+        string message = $"Validation error. The value is invalid{insert}.";
+
+        return Error.Validation("invalid.value", message, invalidField);
+    }
+
+    public static Error CannotBeEmpty(string? invalidField = null)
+    {
+        string insert = invalidField == null ? string.Empty : ": " + invalidField;
+        string message = $"Validation error. The value cannot be empty{insert}.";
 
         return Error.Validation("invalid.value", message, invalidField);
     }

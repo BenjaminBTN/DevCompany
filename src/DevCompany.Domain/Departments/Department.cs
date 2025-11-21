@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using DevCompany.Domain.Departments.VO;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Departments;
 
@@ -51,7 +52,7 @@ public class Department
     {
     }
 
-    public static Result<Department> Create(
+    public static Result<Department, Errors> Create(
         DepartmentName name,
         string identifier,
         DepartmentId? parentId,
@@ -61,11 +62,16 @@ public class Department
         IEnumerable<Guid> locationIds,
         IEnumerable<Guid> positionIds)
     {
+        List<Error> errors = [];
+
         if (string.IsNullOrWhiteSpace(identifier))
-            return Result.Failure<Department>("Identifier cannot be empty.");
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(Identifier)));
 
         if (depth < 0)
-            return Result.Failure<Department>("Depth cannot be less then zero.");
+            errors.Add(GeneralErrors.InvalidField(nameof(Depth)));
+
+        if (errors.Count != 0)
+            return new Errors(errors);
 
         var id = DepartmentId.New();
         DateTime createdAt = DateTime.UtcNow;

@@ -14,6 +14,7 @@
     <ProjectReference Include="..\DevCompany.Infrastructure\DevCompany.Infrastructure.csproj" />
     <ProjectReference Include="..\DevCompany.Contracts\DevCompany.Contracts.csproj" />
     <ProjectReference Include="..\DevCompany.Application\DevCompany.Application.csproj" />
+    <ProjectReference Include="..\DevCompany.Shared\DevCompany.Shared.csproj" />
   </ItemGroup>
 
 </Project>

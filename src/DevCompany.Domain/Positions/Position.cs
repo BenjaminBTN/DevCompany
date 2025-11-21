@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using DevCompany.Domain.Positions.VO;
 using DevCompany.Domain.Shared.Constants;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Positions;
 
@@ -34,10 +35,10 @@ public class Position
     {
     }
 
-    public static Result<Position> Create(PositionName name, string? description, bool isActive)
+    public static Result<Position, Error> Create(PositionName name, string? description, bool isActive)
     {
         if (description?.Length > LengthConstants.LENGTH_1000)
-            return Result.Failure<Position>("Description cannot be more than 1000");
+            return GeneralErrors.InvalidField(nameof(Description));
 
         var id = PositionId.New();
         DateTime createdAt = DateTime.UtcNow;

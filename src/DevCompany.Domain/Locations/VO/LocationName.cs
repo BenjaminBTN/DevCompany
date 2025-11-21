@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using DevCompany.Domain.Shared.Constants;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Locations.VO;
 
@@ -12,13 +13,18 @@ public class LocationName
 
     public string Value { get; }
 
-    public static Result<LocationName> Create(string value)
+    public static Result<LocationName, Errors> Create(string value)
     {
+        List<Error> errors = [];
+
         if (string.IsNullOrWhiteSpace(value))
-            return Result.Failure<LocationName>(nameof(LocationName) + " cannot be empty.");
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(LocationName)));
 
         if (value.Length < LengthConstants.LENGTH_3 || value.Length > LengthConstants.LENGTH_120)
-            return Result.Failure<LocationName>("Invalid " + nameof(LocationName) + " length.");
+            errors.Add(GeneralErrors.InvalidField(nameof(LocationName)));
+
+        if (errors.Count != 0)
+            return new Errors(errors);
 
         return new LocationName(value);
     }

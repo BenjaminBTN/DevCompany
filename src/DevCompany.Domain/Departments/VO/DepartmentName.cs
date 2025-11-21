@@ -1,4 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
+using DevCompany.Domain.Shared.Constants;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Departments.VO;
 
@@ -11,13 +13,18 @@ public record DepartmentName
 
     public string Value { get; }
 
-    public static Result<DepartmentName> Create(string value)
+    public static Result<DepartmentName, Errors> Create(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
-            return Result.Failure<DepartmentName>(nameof(DepartmentName) + " cannot be empty.");
+        List<Error> errors = [];
 
-        if (value.Length < 3 || value.Length > 150)
-            return Result.Failure<DepartmentName>("Invalid " + nameof(DepartmentName) + " length.");
+        if (string.IsNullOrWhiteSpace(value))
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(DepartmentName)));
+
+        if (value.Length < LengthConstants.LENGTH_3 || value.Length > LengthConstants.LENGTH_150)
+            errors.Add(GeneralErrors.InvalidField(nameof(DepartmentName)));
+
+        if (errors.Count != 0)
+            return new Errors(errors);
 
         return new DepartmentName(value);
     }

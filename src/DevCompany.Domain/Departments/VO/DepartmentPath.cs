@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using CSharpFunctionalExtensions;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Departments.VO;
 
@@ -12,10 +13,10 @@ public record DepartmentPath
         Value = value;
     }
 
-    public static Result<DepartmentPath> Create(string value)
+    public static Result<DepartmentPath, Error> Create(string value)
     {
         if (Regex.Match(value, @"\w").Success == false)
-            return Result.Failure<DepartmentPath>("Invalid " + nameof(DepartmentPath) + ".");
+            return GeneralErrors.InvalidField("DepartmentPath");
 
         return new DepartmentPath(value);
     }

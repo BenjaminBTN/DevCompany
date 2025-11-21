@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using DevCompany.Shared;
 
 namespace DevCompany.Domain.Shared.VO;
 
@@ -23,7 +24,7 @@ public record Address
         PostalCode = postalCode;
     }
 
-    public static Result<Address> Create(
+    public static Result<Address, Errors> Create(
         string country,
         string region,
         string city,
@@ -31,23 +32,31 @@ public record Address
         int houseNumber,
         string postalCode)
     {
+        List<Error> errors = [];
+
         if (string.IsNullOrWhiteSpace(country))
-            return Result.Failure<Address>("Country cannot be empty.");
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(Country)));
 
         if (string.IsNullOrWhiteSpace(region))
-            return Result.Failure<Address>("Region cannot be empty.");
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(Region)));
 
         if (string.IsNullOrWhiteSpace(city))
-            return Result.Failure<Address>("City cannot be empty.");
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(City)));
 
         if (string.IsNullOrWhiteSpace(street))
-            return Result.Failure<Address>("Street cannot be empty.");
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(Street)));
 
         if (houseNumber < 1)
-            return Result.Failure<Address>("House number cannot be less than 1.");
+            errors.Add(GeneralErrors.InvalidField(nameof(HouseNumber)));
 
-        if (string.IsNullOrWhiteSpace(postalCode) || postalCode.Length < POSTAL_CODE_LENGTH)
-            return Result.Failure<Address>("Postal code cannot be empty or less than 6.");
+        if (string.IsNullOrWhiteSpace(postalCode))
+            errors.Add(GeneralErrors.CannotBeEmpty(nameof(PostalCode)));
+
+        if (postalCode.Length < POSTAL_CODE_LENGTH)
+            errors.Add(GeneralErrors.InvalidField(nameof(PostalCode)));
+
+        if (errors.Count != 0)
+            return new Errors(errors);
 
         return new Address(country, region, city, street, houseNumber, postalCode);
     }

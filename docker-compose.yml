@@ -1,7 +1,9 @@
-volumes:
+﻿volumes:
   postgres-data:
 
+
 services:
+  
   postgres:
     container_name: postgres_directory_service
     image: postgres
@@ -13,4 +15,15 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5434:5432"
+    restart: always
+
+  seq:
+    container_name: seq_directory_service
+    image: datalust/seq:2025.2
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_FIRSTRUN_NOAUTHENTICATION: "true"
+    ports:
+      - "8081:80"
+      - "5341:5341"
     restart: always

@@ -1,11 +1,19 @@
 ﻿using DevCompany.Application.Locations;
 using DevCompany.Infrastructure;
 using DevCompany.Infrastructure.Repositories;
+using Serilog;
+using Serilog.Exceptions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+builder.Services.AddSerilog((sp, lc) => lc
+    .ReadFrom.Configuration(builder.Configuration)
+    .ReadFrom.Services(sp)
+    .Enrich.FromLogContext()
+    .Enrich.WithExceptionDetails());
 
 builder.Services.AddScoped<DirectoryServiceDbContext>(
     _ => new (builder.Configuration.GetConnectionString("DirectoryServiceDb")!));

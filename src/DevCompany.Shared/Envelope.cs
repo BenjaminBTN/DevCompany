@@ -5,7 +5,7 @@ public record Envelope
     public object? Result { get; }
     public Errors? Errors { get; }
     public DateTime TimeGenerated { get; }
-    public bool IsError => Errors != null || Errors!.Any();
+    public bool IsError => Errors != null && Errors.Any();
 
     private Envelope(object? result, Errors? errors)
     {

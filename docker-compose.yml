@@ -6,7 +6,7 @@ services:
   
   postgres:
     container_name: postgres_directory_service
-    image: postgres
+    image: postgres:17
     environment:
       POSTGRES_DB: directory_service_db
       POSTGRES_USER: postgres

@@ -230,6 +230,7 @@ dotnet_diagnostic.SA1500.severity = none
 dotnet_diagnostic.SA1502.severity = none
 dotnet_diagnostic.SA1503.severity = none
 dotnet_diagnostic.SA1508.severity = none
+dotnet_diagnostic.SA1513.severity = none
 dotnet_diagnostic.SA1516.severity = none
 dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1601.severity = none
@@ -237,7 +238,10 @@ dotnet_diagnostic.SA1602.severity = none
 dotnet_diagnostic.SA1623.severity = none
 dotnet_diagnostic.SA1633.severity = none
 
-# Отключаем или меняем уровень серьезности предупреждения SA1310, чтобы не конфликтовало с новыми правилами.
+#IDE ANALYZERS
+dotnet_diagnostic.IDE0008.severity = none
+
+# Отключаем или меняем уровень серьезности предупреждения SA1310, чтобы не конфликтовало с новыми правилами
 dotnet_diagnostic.SA1310.severity = none
 
 # Определяем символы для публичных констант

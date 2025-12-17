@@ -2,6 +2,7 @@
 using DevCompany.Application.Locations;
 using DevCompany.Infrastructure;
 using DevCompany.Infrastructure.Repositories;
+using DevCompany.Presentation.Middleware;
 using Serilog;
 using Serilog.Exceptions;
 
@@ -32,6 +33,7 @@ try
 
     WebApplication app = builder.Build();
 
+    app.UseExceptionHandlingMiddleware();
     app.UseSerilogRequestLogging();
 
     if (app.Environment.IsDevelopment())

@@ -1,8 +1,12 @@
 ﻿using System.Globalization;
+using System.Reflection;
+using DevCompany.Application.Abstractions;
 using DevCompany.Application.Locations;
+using DevCompany.Application.Validators;
 using DevCompany.Infrastructure;
 using DevCompany.Infrastructure.Repositories;
 using DevCompany.Presentation.Middleware;
+using FluentValidation;
 using Serilog;
 using Serilog.Exceptions;
 
@@ -29,7 +33,9 @@ try
     builder.Services.AddScoped<DirectoryServiceDbContext>(
         _ => new (builder.Configuration.GetConnectionString("DirectoryServiceDb")!));
     builder.Services.AddScoped<ILocationsRepository, LocationsRepository>();
-    builder.Services.AddScoped<CreateLocationsHandler>();
+    builder.Services.AddScoped<ICommandHandler<Guid, CreateLocationCommand>, CreateLocationHandler>();
+    builder.Services.AddScoped<CreateLocationHandler>();
+    builder.Services.AddValidatorsFromAssembly(typeof(CustomValidators).Assembly);
 
     WebApplication app = builder.Build();
 

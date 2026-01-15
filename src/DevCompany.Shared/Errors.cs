@@ -4,6 +4,7 @@ namespace DevCompany.Shared;
 
 public class Errors : IEnumerable<Error>
 {
+    private const string SEPARATOR = "&&";
     private readonly List<Error> _errors;
 
     public Errors(IEnumerable<Error> errors)
@@ -20,4 +21,31 @@ public class Errors : IEnumerable<Error>
     {
         return GetEnumerator();
     }
+
+    #region Дополнительные методы
+    public string Serialize()
+    {
+        List<string> errorsString = [];
+        foreach (var error in _errors)
+        {
+             errorsString.Add(error.Serialize());
+        }
+        return string.Join(SEPARATOR, errorsString);
+    }
+
+    public static Errors Deserialize(string serializedSting)
+    {
+        string[] parts = serializedSting.Split(SEPARATOR);
+        if (parts.Length == 0)
+            throw new ArgumentNullException(nameof(serializedSting));
+
+        List<Error> errors = [];
+
+        foreach (string part in parts)
+        {
+            errors.Add(Error.Deserialize(part));
+        }
+        return new Errors(errors);
+    }
+    #endregion
 }

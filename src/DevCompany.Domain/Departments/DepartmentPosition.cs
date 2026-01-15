@@ -23,10 +23,10 @@ public class DepartmentPosition
     {
     }
 
-    public static Result<DepartmentPosition, Error> Create(DepartmentId departmentId, Guid positionId)
+    public static Result<DepartmentPosition, Errors> Create(DepartmentId departmentId, Guid positionId)
     {
         if (positionId == Guid.Empty)
-            return GeneralErrors.CannotBeEmpty(nameof(PositionId));
+            return GeneralErrors.CannotBeEmpty(nameof(PositionId)).ToErrors();
 
         var id = DepartmentPositionId.New();
 

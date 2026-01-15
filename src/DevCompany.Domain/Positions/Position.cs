@@ -35,10 +35,10 @@ public class Position
     {
     }
 
-    public static Result<Position, Error> Create(PositionName name, string? description, bool isActive)
+    public static Result<Position, Errors> Create(PositionName name, string? description, bool isActive)
     {
         if (description?.Length > LengthConstants.LENGTH_1000)
-            return GeneralErrors.InvalidField(nameof(Description));
+            return GeneralErrors.InvalidField(nameof(Description)).ToErrors();
 
         var id = PositionId.New();
         DateTime createdAt = DateTime.UtcNow;

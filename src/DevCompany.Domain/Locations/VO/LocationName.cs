@@ -4,7 +4,7 @@ using DevCompany.Shared;
 
 namespace DevCompany.Domain.Locations.VO;
 
-public class LocationName
+public record LocationName
 {
     private LocationName(string value)
     {

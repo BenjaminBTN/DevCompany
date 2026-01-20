@@ -7,6 +7,11 @@ public class Errors : IEnumerable<Error>
     private const string SEPARATOR = "&&";
     private readonly List<Error> _errors;
 
+    public Errors()
+    {
+        _errors = [];
+    }
+
     public Errors(IEnumerable<Error> errors)
     {
         _errors = errors.ToList();
@@ -33,7 +38,7 @@ public class Errors : IEnumerable<Error>
         return string.Join(SEPARATOR, errorsString);
     }
 
-    public static Errors Deserialize(string serializedSting)
+    public static List<Error> Deserialize(string serializedSting)
     {
         string[] parts = serializedSting.Split(SEPARATOR);
         if (parts.Length == 0)
@@ -45,7 +50,7 @@ public class Errors : IEnumerable<Error>
         {
             errors.Add(Error.Deserialize(part));
         }
-        return new Errors(errors);
+        return errors;
     }
     #endregion
 }

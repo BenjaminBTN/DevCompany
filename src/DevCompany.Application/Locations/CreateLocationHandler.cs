@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using DevCompany.Application.Abstractions;
+using DevCompany.Application.Validators;
 using DevCompany.Domain.Locations;
 using DevCompany.Domain.Locations.VO;
 using DevCompany.Domain.Shared.VO;
@@ -27,13 +28,7 @@ public class CreateLocationHandler : ICommandHandler<Guid, CreateLocationCommand
         var validationResult = _validator.Validate(command);
         if (validationResult.IsValid == false)
         {
-            List<Error> errors = [];
-            var serializedErrorStings = validationResult.Errors.Select(e => e.ErrorMessage);
-            foreach (var error in serializedErrorStings)
-            {
-                errors.Add(Error.Deserialize(error));
-            }
-            return new Errors(errors);
+            return validationResult.ToErrors();
         }
 
         var nameResult = LocationName.Create(command.Request.Name);

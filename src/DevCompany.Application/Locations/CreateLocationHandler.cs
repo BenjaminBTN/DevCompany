@@ -76,7 +76,10 @@ public class CreateLocationHandler : ICommandHandler<Guid, CreateLocationCommand
             createdAt,
             updatedAt);
 
-        Guid id = await _repository.Add(location, cancellationToken);
+        var addLocationResult = await _repository.Add(location, cancellationToken);
+        if (addLocationResult.IsFailure)
+            return addLocationResult.Error.ToErrors();
+        Guid id = addLocationResult.Value;
         _logger.LogInformation("A new Location has been created with ID: {id}.", id);
 
         return id;

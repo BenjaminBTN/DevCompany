@@ -1,6 +1,6 @@
 ﻿using DevCompany.Shared;
 
-namespace DevCompany.Domain.Locations.Errors;
+namespace DevCompany.Domain.EntityErrors;
 
 public static class LocationErrors
 {

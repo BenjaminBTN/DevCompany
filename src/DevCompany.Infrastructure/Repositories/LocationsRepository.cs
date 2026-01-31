@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using DevCompany.Application.Locations;
+using DevCompany.Domain.EntityErrors;
 using DevCompany.Domain.Locations;
-using DevCompany.Domain.Locations.Errors;
 using DevCompany.Infrastructure.Errors;
 using DevCompany.Shared;
 using Microsoft.EntityFrameworkCore;

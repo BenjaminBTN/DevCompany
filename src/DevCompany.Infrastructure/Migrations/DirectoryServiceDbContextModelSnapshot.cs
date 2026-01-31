@@ -152,17 +152,6 @@ namespace DevCompany.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Name", "DevCompany.Domain.Locations.Location.Name#LocationName", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(120)
-                                .HasColumnType("character varying(120)")
-                                .HasColumnName("name");
-                        });
-
                     b.ComplexProperty<Dictionary<string, object>>("TimeZone", "DevCompany.Domain.Locations.Location.TimeZone#Timezone", b1 =>
                         {
                             b1.IsRequired();
@@ -265,6 +254,29 @@ namespace DevCompany.Infrastructure.Migrations
 
             modelBuilder.Entity("DevCompany.Domain.Locations.Location", b =>
                 {
+                    b.OwnsOne("DevCompany.Domain.Locations.VO.LocationName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("LocationId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(120)
+                                .HasColumnType("character varying(120)")
+                                .HasColumnName("name");
+
+                            b1.HasKey("LocationId");
+
+                            b1.HasIndex("Value")
+                                .IsUnique()
+                                .HasDatabaseName("ix_locations_name");
+
+                            b1.ToTable("locations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("LocationId");
+                        });
+
                     b.OwnsOne("DevCompany.Domain.Shared.VO.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("LocationId")
@@ -310,6 +322,9 @@ namespace DevCompany.Infrastructure.Migrations
                         });
 
                     b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("Name")
                         .IsRequired();
                 });
 

@@ -2,6 +2,7 @@
 using DevCompany.Application.Locations;
 using DevCompany.Domain.EntityErrors;
 using DevCompany.Domain.Locations;
+using DevCompany.Infrastructure.Configurations;
 using DevCompany.Infrastructure.Errors;
 using DevCompany.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,7 @@ public class LocationsRepository : ILocationsRepository
         {
             if (pgEx.SqlState == PostgresErrorCodes.UniqueViolation
                 && pgEx.ConstraintName != null
-                && pgEx.ConstraintName.Contains("title", StringComparison.InvariantCultureIgnoreCase))
+                && pgEx.ConstraintName.Contains(LocationIndex.NAME, StringComparison.InvariantCultureIgnoreCase))
             {
                 var error = LocationErrors.NameConflict(location.Name.Value);
                 _logger.LogError(ex, "{message}",  error.Message);

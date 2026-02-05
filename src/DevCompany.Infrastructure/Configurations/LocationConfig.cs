@@ -79,4 +79,5 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
 public static class LocationIndex
 {
     public const string NAME = "ix_locations_name";
+    public const string ADDRESS = "ix_locations_address";
 }

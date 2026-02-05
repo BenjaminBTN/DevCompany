@@ -33,13 +33,20 @@ public class LocationsRepository : ILocationsRepository
         }
         catch (DbUpdateException ex) when (ex.InnerException is PostgresException pgEx)
         {
-            if (pgEx.SqlState == PostgresErrorCodes.UniqueViolation
-                && pgEx.ConstraintName != null
-                && pgEx.ConstraintName.Contains(LocationIndex.NAME, StringComparison.InvariantCultureIgnoreCase))
+            if (pgEx.SqlState == PostgresErrorCodes.UniqueViolation && pgEx.ConstraintName != null)
             {
-                var error = LocationErrors.NameConflict(location.Name.Value);
-                _logger.LogError(ex, "{message}",  error.Message);
-                return error;
+                if (pgEx.ConstraintName.Contains(LocationIndex.NAME, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    var error = LocationErrors.NameConflict(location.Name.Value, nameof(location.Name));
+                    _logger.LogError(ex, "{message}", error.Message);
+                    return error;
+                }
+                if (pgEx.ConstraintName.Contains(LocationIndex.ADDRESS, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    var error = LocationErrors.AddressConflict(location.Address.ToString(), nameof(location.Address));
+                    _logger.LogError(ex, "{message}", error.Message);
+                    return error;
+                }
             }
         }
         catch (Exception ex)
@@ -48,7 +55,6 @@ public class LocationsRepository : ILocationsRepository
             _logger.LogError(ex, "{message}", error.Message);
             return error;
         }
-
         return location.Id.Value;
     }
 }

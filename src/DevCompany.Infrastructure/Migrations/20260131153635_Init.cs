@@ -149,6 +149,10 @@ namespace DevCompany.Infrastructure.Migrations
                 table: "locations",
                 column: "name",
                 unique: true);
+
+            migrationBuilder.Sql(@"
+                CREATE UNIQUE INDEX ix_locations_address 
+                ON locations (address)");
         }
 
         /// <inheritdoc />

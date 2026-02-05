@@ -23,8 +23,8 @@ public class Error
     public static Error NotFound(string code, string message)
         => new(ErrorType.NOT_FOUND, code, message);
 
-    public static Error Conflict(string code, string message)
-        => new(ErrorType.CONFLICT, code, message);
+    public static Error Conflict(string code, string message, string? invalidField = null)
+        => new(ErrorType.CONFLICT, code, message, invalidField);
 
     public static Error Failure(string code, string message)
         => new(ErrorType.FAILURE, code, message);

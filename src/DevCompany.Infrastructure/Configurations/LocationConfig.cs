@@ -22,11 +22,16 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
                 value => LocationId.Create(value))
             .HasColumnName("id");
 
-        builder.ComplexProperty(l => l.Name, nb =>
+        builder.OwnsOne(l => l.Name, nb =>
         {
             nb.Property(l => l.Value)
                 .HasMaxLength(LengthConstants.LENGTH_120)
-                .HasColumnName("name");
+                .HasColumnName("name")
+                .IsRequired();
+
+            nb.HasIndex(l => l.Value)
+                .IsUnique()
+                .HasDatabaseName(LocationIndex.NAME);
         });
 
         builder.OwnsOne(l => l.Address, ab =>
@@ -69,4 +74,10 @@ public class LocationConfig : IEntityTypeConfiguration<Location>
         builder.Property(l => l.UpdatedAt)
             .HasColumnName("updated_at");
     }
+}
+
+public static class LocationIndex
+{
+    public const string NAME = "ix_locations_name";
+    public const string ADDRESS = "ix_locations_address";
 }

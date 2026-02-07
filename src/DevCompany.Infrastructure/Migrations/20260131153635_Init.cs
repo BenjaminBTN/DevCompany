@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DevCompany.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,10 +41,10 @@ namespace DevCompany.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
                     crated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    name = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
                     time_zone = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     address = table.Column<string>(type: "jsonb", nullable: false)
                 },
@@ -143,6 +143,16 @@ namespace DevCompany.Infrastructure.Migrations
                 name: "IX_departments_parent_id",
                 table: "departments",
                 column: "parent_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_locations_name",
+                table: "locations",
+                column: "name",
+                unique: true);
+
+            migrationBuilder.Sql(@"
+                CREATE UNIQUE INDEX ix_locations_address 
+                ON locations (address)");
         }
 
         /// <inheritdoc />

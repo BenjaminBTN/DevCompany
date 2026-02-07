@@ -15,10 +15,10 @@ public record Timezone
         Value = value;
     }
 
-    public static Result<Timezone, Error> Create(string value)
+    public static Result<Timezone, Errors> Create(string value)
     {
         if (Regex.Match(value, IANA_PATTERN).Success == false)
-            return GeneralErrors.InvalidField("Timezone");
+            return GeneralErrors.InvalidField("Timezone").ToErrors();
 
         return new Timezone(value);
     }

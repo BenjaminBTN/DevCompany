@@ -1,6 +1,6 @@
 ﻿namespace DevCompany.Shared;
 
-public class GeneralErrors
+public static class GeneralErrors
 {
     public static Error InvalidField(string? invalidField = null)
     {

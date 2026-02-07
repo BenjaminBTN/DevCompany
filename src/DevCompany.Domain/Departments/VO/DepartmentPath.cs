@@ -13,10 +13,10 @@ public record DepartmentPath
         Value = value;
     }
 
-    public static Result<DepartmentPath, Error> Create(string value)
+    public static Result<DepartmentPath, Errors> Create(string value)
     {
         if (Regex.Match(value, @"\w").Success == false)
-            return GeneralErrors.InvalidField("DepartmentPath");
+            return GeneralErrors.InvalidField("DepartmentPath").ToErrors();
 
         return new DepartmentPath(value);
     }

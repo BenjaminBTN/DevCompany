@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Reflection;
 using DevCompany.Application.Abstractions;
 using DevCompany.Application.Locations;
 using DevCompany.Application.Validators;
@@ -27,8 +26,7 @@ try
     builder.Services.AddSerilog((sp, lc) => lc
         .ReadFrom.Configuration(builder.Configuration)
         .ReadFrom.Services(sp)
-        .Enrich.FromLogContext()
-        .Enrich.WithExceptionDetails());
+        .Enrich.FromLogContext());
 
     builder.Services.AddScoped<DirectoryServiceDbContext>(
         _ => new (builder.Configuration.GetConnectionString("DirectoryServiceDb")!));

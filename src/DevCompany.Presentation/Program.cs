@@ -1,13 +1,9 @@
 ﻿using System.Globalization;
-using DevCompany.Application.Abstractions;
-using DevCompany.Application.Locations;
-using DevCompany.Application.Validators;
-using DevCompany.Infrastructure;
-using DevCompany.Infrastructure.Repositories;
+using DevCompany.Application.Extensions;
+using DevCompany.Infrastructure.Extensions;
+using DevCompany.Presentation.Extensions;
 using DevCompany.Presentation.Middleware;
-using FluentValidation;
 using Serilog;
-using Serilog.Exceptions;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -20,20 +16,10 @@ try
 
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddControllers();
-    builder.Services.AddOpenApi();
-
-    builder.Services.AddSerilog((sp, lc) => lc
-        .ReadFrom.Configuration(builder.Configuration)
-        .ReadFrom.Services(sp)
-        .Enrich.FromLogContext());
-
-    builder.Services.AddScoped<DirectoryServiceDbContext>(
-        _ => new (builder.Configuration.GetConnectionString("DirectoryServiceDb")!));
-    builder.Services.AddScoped<ILocationsRepository, LocationsRepository>();
-    builder.Services.AddScoped<ICommandHandler<Guid, CreateLocationCommand>, CreateLocationHandler>();
-    builder.Services.AddScoped<CreateLocationHandler>();
-    builder.Services.AddValidatorsFromAssembly(typeof(CustomValidators).Assembly);
+    builder.Services.AddWeb();
+    builder.Services.AddSerilogLogging(builder.Configuration);
+    builder.Services.AddApplicatinon();
+    builder.Services.AddInfrastructure(builder.Configuration);
 
     WebApplication app = builder.Build();
 

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\DevCompany.Contracts\DepartmentService.Contracts.csproj" />
+    <ProjectReference Include="..\DevCompany.Shared\DepartmentService.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CSharpFunctionalExtensions" Version="3.6.0" />
+  </ItemGroup>
+</Project>

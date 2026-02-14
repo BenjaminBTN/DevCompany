@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>DepartmentService.Application</AssemblyName>
+    <AssemblyTitle>DepartmentService.Application</AssemblyTitle>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DepartmentService.Contracts\DepartmentService.Contracts.csproj" />
+    <ProjectReference Include="..\DepartmentService.Domain\DepartmentService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

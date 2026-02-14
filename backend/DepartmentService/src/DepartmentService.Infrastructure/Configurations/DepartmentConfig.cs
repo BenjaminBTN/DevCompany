@@ -1,0 +1,68 @@
+﻿using DepartmentService.Domain.Departments;
+using DepartmentService.Domain.Departments.VO;
+using DepartmentService.Domain.Shared.Constants;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace DepartmentService.Infrastructure.Configurations;
+
+public class DepartmentConfig : IEntityTypeConfiguration<Department>
+{
+    public void Configure(EntityTypeBuilder<Department> builder)
+    {
+        builder.ToTable("departments");
+
+        builder.HasKey(d => d.Id)
+            .HasName("pk_departments");
+
+        builder.Property(d => d.Id)
+            .HasConversion(
+                id => id.Value, 
+                value => DepartmentId.Create(value))
+            .HasColumnName("id");
+
+        builder.ComplexProperty(d => d.Name, nb => 
+        { 
+            nb.Property(d => d.Value)
+            .HasMaxLength(LengthConstants.LENGTH_150)
+            .HasColumnName("name");
+        });
+
+        builder.Property(d => d.Identifier)
+            .HasMaxLength(LengthConstants.LENGTH_150)
+            .HasColumnName("identifier");
+
+        builder.Property(d => d.ParentId)
+            .HasConversion(
+                id => id!.Value,
+                value => DepartmentId.Create(value))
+            .IsRequired(false)
+            .HasColumnName("parent_id");
+
+        builder.HasOne<Department>()
+            .WithMany()
+            .HasForeignKey(d => d.ParentId)
+            .HasConstraintName("fk_departments_parent_id")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.ComplexProperty(d => d.Path, nb =>
+        {
+            nb.Property(d => d.Value)
+            .HasMaxLength(LengthConstants.LENGTH_150)
+            .HasColumnName("path");
+        });
+
+        builder.Property(d => d.Depth)
+            .HasMaxLength(LengthConstants.LENGTH_100)
+            .HasColumnName("depth");
+
+        builder.Property(d => d.IsActive)
+            .HasColumnName("is_active");
+
+        builder.Property(d => d.CreatedAt)
+            .HasColumnName("created_at");
+
+        builder.Property(d => d.UpdatedAt)
+            .HasColumnName("updated_at");
+    }
+}

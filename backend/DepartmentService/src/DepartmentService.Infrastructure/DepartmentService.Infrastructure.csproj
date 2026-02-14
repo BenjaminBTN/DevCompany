@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DepartmentService.Application\DepartmentService.Application.csproj" />
+    <ProjectReference Include="..\DepartmentService.Contracts\DepartmentService.Contracts.csproj" />
+    <ProjectReference Include="..\DepartmentService.Domain\DepartmentService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

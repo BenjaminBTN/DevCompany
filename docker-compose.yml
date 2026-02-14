@@ -1,9 +1,7 @@
 ﻿volumes:
   postgres-data:
 
-
 services:
-  
   postgres:
     container_name: postgres_directory_service
     image: postgres:17
@@ -27,3 +25,4 @@ services:
       - "8081:80"
       - "5341:5341"
     restart: always
+    

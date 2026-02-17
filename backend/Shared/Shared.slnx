@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Shared.Kernel/Shared.Kernel.csproj" Id="c512dbc0-6cbf-4e46-969b-f7e87da9ebcd" />
+  </Folder>
+</Solution>

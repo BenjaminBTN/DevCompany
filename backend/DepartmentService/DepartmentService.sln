@@ -24,8 +24,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{754FC069-D67B-A9D7-50A1-8D1CA196D8F1}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
-		docker-compose.yml = docker-compose.yml
+		..\..\docker-compose.yml = ..\..\docker-compose.yml
+		..\..\README.md = ..\..\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepartmentService.Shared", "src\DepartmentService.Shared\DepartmentService.Shared.csproj", "{55DC7BD8-18CF-458B-92E9-64C6A57CC5B2}"

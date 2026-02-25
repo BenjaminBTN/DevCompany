@@ -2,8 +2,8 @@
 using DepartmentService.Application.Extensions;
 using DepartmentService.Infrastructure.Extensions;
 using DepartmentService.Presentation.Extensions;
-using DepartmentService.Presentation.Middleware;
 using Serilog;
+using Shared.Framework.Middleware;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -18,7 +18,7 @@ try
 
     builder.Services.AddWeb();
     builder.Services.AddSerilogLogging(builder.Configuration);
-    builder.Services.AddApplicatinon();
+    builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
 
     WebApplication app = builder.Build();

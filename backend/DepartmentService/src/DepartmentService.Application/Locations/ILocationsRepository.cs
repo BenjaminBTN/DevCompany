@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using DepartmentService.Domain.Locations;
-using DepartmentService.Shared;
+using Shared.Kernel;
 
 namespace DepartmentService.Application.Locations;
 

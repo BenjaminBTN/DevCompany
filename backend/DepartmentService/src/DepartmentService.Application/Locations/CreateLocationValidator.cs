@@ -1,7 +1,7 @@
-﻿using DepartmentService.Application.Validators;
-using DepartmentService.Domain.Locations.VO;
+﻿using DepartmentService.Domain.Locations.VO;
 using DepartmentService.Domain.Shared.VO;
 using FluentValidation;
+using Shared.Core.Validators;
 
 namespace DepartmentService.Application.Locations;
 

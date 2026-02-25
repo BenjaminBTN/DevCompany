@@ -1,6 +1,9 @@
-﻿using DepartmentService.Shared;
+﻿using CSharpFunctionalExtensions;
+using Microsoft.AspNetCore.Http;
+using Shared.Kernel;
+using IResult = Microsoft.AspNetCore.Http.IResult;
 
-namespace DepartmentService.Presentation.EndpointResults;
+namespace Shared.Framework.EndpointResults;
 
 public class ErrorResult : IResult
 {

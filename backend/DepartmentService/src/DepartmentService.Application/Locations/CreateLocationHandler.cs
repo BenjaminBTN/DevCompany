@@ -1,12 +1,12 @@
 ﻿using CSharpFunctionalExtensions;
-using DepartmentService.Application.Abstractions;
-using DepartmentService.Application.Validators;
 using DepartmentService.Domain.Locations;
 using DepartmentService.Domain.Locations.VO;
 using DepartmentService.Domain.Shared.VO;
-using DepartmentService.Shared;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using Shared.Core.Abstractions;
+using Shared.Core.Validators;
+using Shared.Kernel;
 
 namespace DepartmentService.Application.Locations;
 

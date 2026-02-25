@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using DepartmentService.Domain.Departments.VO;
-using DepartmentService.Shared;
+using Shared.Kernel;
 
 namespace DepartmentService.Domain.Departments;
 

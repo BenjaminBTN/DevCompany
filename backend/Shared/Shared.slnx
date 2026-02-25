@@ -1,5 +1,13 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/Shared.Kernel/Shared.Kernel.csproj" Id="c512dbc0-6cbf-4e46-969b-f7e87da9ebcd" />
+    <Project Path="src/Shared.Core/Shared.Core.csproj" Id="92634209-7a58-4e18-8084-2ab21a8b2f34" />
+    <Project Path="src/Shared.Framework/Shared.Framework.csproj" Id="4fd886f5-7183-4685-a29f-374c0dc4b1c1" />
+    <Project Path="src/Shared.Kernel/Shared.Kernel.csproj" Id="5f32dcc4-ce20-4090-9642-5a2e01662f06" />
+  </Folder>
+  <Folder Name="/Элементы решения/">
+    <File Path="../../nuget.config" />
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
   </Folder>
 </Solution>

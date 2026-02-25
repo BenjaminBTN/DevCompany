@@ -1,4 +1,4 @@
-﻿using DepartmentService.Shared;
+﻿using Shared.Kernel;
 
 namespace DepartmentService.Infrastructure.Errors;
 

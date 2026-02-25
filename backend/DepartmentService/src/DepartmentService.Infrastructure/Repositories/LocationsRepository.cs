@@ -4,10 +4,10 @@ using DepartmentService.Domain.EntityErrors;
 using DepartmentService.Domain.Locations;
 using DepartmentService.Infrastructure.Configurations;
 using DepartmentService.Infrastructure.Errors;
-using DepartmentService.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
+using Shared.Kernel;
 
 namespace DepartmentService.Infrastructure.Repositories;
 

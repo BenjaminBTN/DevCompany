@@ -1,6 +1,7 @@
-﻿using DepartmentService.Shared;
+﻿using Microsoft.AspNetCore.Http;
+using Shared.Kernel;
 
-namespace DepartmentService.Presentation.EndpointResults;
+namespace Shared.Framework.EndpointResults;
 
 public sealed class SuccsessResult<TValue> : IResult
 {

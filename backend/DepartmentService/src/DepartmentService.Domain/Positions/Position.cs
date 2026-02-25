@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using DepartmentService.Domain.Positions.VO;
 using DepartmentService.Domain.Shared.Constants;
-using DepartmentService.Shared;
+using Shared.Kernel;
 
 namespace DepartmentService.Domain.Positions;
 

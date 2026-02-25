@@ -1,8 +1,9 @@
 ﻿using CSharpFunctionalExtensions;
-using DepartmentService.Shared;
+using Microsoft.AspNetCore.Http;
+using Shared.Kernel;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
-namespace DepartmentService.Presentation.EndpointResults;
+namespace Shared.Framework.EndpointResults;
 
 public class EndpointResult<TValue> : IResult
 {

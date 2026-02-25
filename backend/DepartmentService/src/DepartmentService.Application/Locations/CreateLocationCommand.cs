@@ -1,6 +1,5 @@
-﻿using DepartmentService.Application.Abstractions;
-using DepartmentService.Contracts.Locations;
-using DepartmentService.Contracts.Shared;
+﻿using DepartmentService.Contracts.Locations;
+using Shared.Core.Abstractions;
 
 namespace DepartmentService.Application.Locations;
 

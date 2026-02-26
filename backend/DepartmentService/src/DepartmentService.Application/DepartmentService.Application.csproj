@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BenjaminBTN.Shared.Core" Version="1.0.0" />
+    <PackageReference Include="BenjaminBTN.Shared.Kernel" Version="1.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
   </ItemGroup>
 

@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <PackageId>BenjaminBTN.Shared.Kernel</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>BenjaminBTN</Authors>
+    <Company>BenjaminBTN</Company>
+    <PackageDescription>Shared Kernel</PackageDescription>
+    <RepositoryUrl>https://gitlab.com/benjaminbtn-devcompany/Shared</RepositoryUrl>
+  </PropertyGroup>
+  
+</Project>

@@ -1,7 +1,7 @@
-﻿using DepartmentService.Shared;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
+using Shared.Kernel;
 
-namespace DepartmentService.Application.Validators;
+namespace Shared.Core.Validators;
 
 public static class ValidationExtensions
 {

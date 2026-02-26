@@ -1,8 +1,8 @@
 ﻿using CSharpFunctionalExtensions;
-using DepartmentService.Shared;
 using FluentValidation;
+using Shared.Kernel;
 
-namespace DepartmentService.Application.Validators;
+namespace Shared.Core.Validators;
 
 public static class CustomValidators
 {

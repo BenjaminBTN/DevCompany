@@ -1,6 +1,9 @@
-﻿using DepartmentService.Shared;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Shared.Kernel;
 
-namespace DepartmentService.Presentation.Middleware;
+namespace Shared.Framework.Middleware;
 
 public class ExceptionMiddleware
 {

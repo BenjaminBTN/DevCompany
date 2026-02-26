@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>BenjaminBTN.Shared.Core</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>BenjaminBTN</Authors>
+    <Company>BenjaminBTN</Company>
+    <PackageDescription>Shared Core</PackageDescription>
+    <RepositoryUrl>https://gitlab.com/benjaminbtn-devcompany/Shared</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Kernel\Shared.Kernel.csproj" />
+  </ItemGroup>
+
+</Project>

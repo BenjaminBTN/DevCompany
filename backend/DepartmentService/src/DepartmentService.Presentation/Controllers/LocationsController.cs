@@ -1,7 +1,7 @@
 ﻿using DepartmentService.Application.Locations;
 using DepartmentService.Contracts.Locations;
-using DepartmentService.Presentation.EndpointResults;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Framework.EndpointResults;
 
 namespace DepartmentService.Presentation.Controllers;
 

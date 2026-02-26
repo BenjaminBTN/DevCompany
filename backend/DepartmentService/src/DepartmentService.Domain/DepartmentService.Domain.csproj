@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\DepartmentService.Contracts\DepartmentService.Contracts.csproj" />
-    <ProjectReference Include="..\DepartmentService.Shared\DepartmentService.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BenjaminBTN.Shared.Kernel" Version="1.0.0" />
     <PackageReference Include="CSharpFunctionalExtensions" Version="3.6.0" />
   </ItemGroup>
 </Project>
